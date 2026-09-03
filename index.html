@@ -31,7 +31,6 @@
   }
   a{color:inherit; text-decoration:none;}
 
-  /* topographic contour backdrop */
   .contours{
     position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.35;
   }
@@ -39,7 +38,6 @@
 
   .wrap{max-width:1180px; margin:0 auto; padding:0 40px; position:relative; z-index:1;}
 
-  /* header */
   header{
     position:relative; z-index:2;
     padding:34px 0 0;
@@ -61,7 +59,7 @@
     display:block; font-family:var(--mono); font-size:10.5px; color:var(--paper-dim); letter-spacing:0.06em; margin-top:1px;
   }
   nav.links{
-    display:flex; gap:34px; font-size:14px; color:var(--paper-dim);
+    display:flex; gap:34px; font-size:14px; color:var(--paper-dim); align-items:center;
   }
   nav.links a{position:relative; padding-bottom:4px; transition:color .18s ease;}
   nav.links a:hover{color:var(--paper);}
@@ -71,10 +69,14 @@
     transition:transform .25s ease;
   }
   nav.links a:hover::after{transform:scaleX(1);}
+  nav.links a.resume-link{
+    font-family:var(--mono); font-size:12.5px; color:var(--contour); border:1px solid var(--contour); padding:7px 14px;
+  }
+  nav.links a.resume-link::after{display:none;}
+  nav.links a.resume-link:hover{background:var(--contour); color:var(--ink);}
   .menu-btn{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:0;}
   .menu-btn span{width:24px; height:2px; background:var(--paper);}
 
-  /* hero */
   .hero{
     padding:120px 0 90px;
     border-bottom:1px solid var(--line);
@@ -109,7 +111,6 @@
   .btn.primary:hover{background:#6e9059;}
   .btn.ghost:hover{border-color:var(--paper); background:rgba(244,238,224,0.05);}
 
-  /* hero layout with photo */
   .hero-grid{
     display:grid; grid-template-columns:1.35fr 0.65fr; gap:56px; align-items:start;
   }
@@ -134,7 +135,6 @@
     display:flex; justify-content:space-between; border-top:1px solid var(--line);
   }
 
-  /* section shared */
   section{padding:88px 0; border-bottom:1px solid var(--line); position:relative; z-index:1;}
   .section-head{
     display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:48px; flex-wrap:wrap;
@@ -146,10 +146,29 @@
     max-width:380px; color:var(--paper-dim); font-size:14.5px;
   }
 
-  /* project tiles — replaces the phantom color-block grid */
   .tiles{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;
   }
+
+  .featured{
+    display:grid; grid-template-columns:1fr 1.15fr; gap:0; border:1px solid var(--line);
+    margin-bottom:44px;
+  }
+  .featured .fimg{overflow:hidden; border-right:1px solid var(--line);}
+  .featured .fimg img{width:100%; height:100%; object-fit:cover; display:block; min-height:260px;}
+  .featured .fbody{padding:34px; display:flex; flex-direction:column; justify-content:center;}
+  .featured .fkicker{font-family:var(--mono); font-size:11.5px; color:var(--contour); margin-bottom:12px;}
+  .featured h3{font-size:23px; font-weight:600; line-height:1.25; margin-bottom:12px;}
+  .featured p{font-size:14px; color:var(--paper-dim); line-height:1.7; margin-bottom:20px; max-width:420px;}
+  .featured .flink{
+    font-family:var(--mono); font-size:12.5px; color:var(--contour); white-space:nowrap;
+    border-bottom:1px solid var(--contour); padding-bottom:1px; width:fit-content;
+  }
+  @media (max-width: 700px){
+    .featured{grid-template-columns:1fr;}
+    .featured .fimg{border-right:none; border-bottom:1px solid var(--line);}
+  }
+
   .tile{
     position:relative; aspect-ratio:4/5; overflow:hidden;
     border:1px solid var(--line);
@@ -180,7 +199,6 @@
     font-family:var(--mono); font-size:11px; color:rgba(242,239,230,0.75);
   }
 
-  /* notebooks */
   .nb-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:20px;
   }
@@ -212,7 +230,6 @@
   }
   .nb-link:hover{opacity:1;}
 
-  /* stack / tools */
   .stack{
     display:flex; flex-wrap:wrap; gap:12px;
   }
@@ -221,7 +238,6 @@
     border:1px solid var(--line); color:var(--paper-dim);
   }
 
-  /* about */
   .about-grid{
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:start;
   }
@@ -232,8 +248,16 @@
   .stat{border-top:1px solid var(--line); padding-top:14px;}
   .stat .num{font-family:var(--mono); font-size:26px; color:var(--contour);}
   .stat .lab{font-size:12.5px; color:var(--paper-dim); margin-top:4px;}
+  .resume-cta{
+    margin-top:28px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .resume-cta a{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink); background:var(--contour);
+    padding:12px 20px; border:1px solid var(--contour); transition:background .2s ease;
+  }
+  .resume-cta a:hover{background:#6e9059;}
+  .resume-cta span{font-size:12.5px; color:var(--paper-dim);}
 
-  /* contact */
   .contact{
     display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:30px;
   }
@@ -298,6 +322,7 @@
         <a href="#notebooks">Notebooks</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="files/ajalon-peterson-resume.pdf" class="resume-link" target="_blank" rel="noopener">Resume</a>
       </nav>
       <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -315,22 +340,34 @@
           <a href="#notebooks" class="btn ghost">Open notebooks</a>
         </div>
       </div>
-        <div class="field-photo">
+      <div class="field-photo">
         <div class="frame">
-          <img src="images for portfolio/profilepic.jpg" alt="Ajalon Peterson">
+          <img src="images/profilepic.jpg" alt="Ajalon Peterson">
         </div>
         <div class="caption">
           <span>fig. 01</span>
           <span>Olympic National Park, WA</span>
         </div>
       </div>
+    </div>
   </section>
 
   <section id="work">
     <div class="section-head">
       <h2>Selected work</h2>
-      <p>Three recent projects spanning remote sensing, hydrology, and municipal planning.</p>
+      <p>A case study, plus three recent projects spanning remote sensing, hydrology, and municipal planning.</p>
     </div>
+
+    <a href="plat-maps.html" class="featured" style="display:grid; color:inherit;">
+      <div class="fimg"><img src="images/case-study/plat-buffer.png" alt="Street buffer corridors overlaid on a historical plat map"></div>
+      <div class="fbody">
+        <div class="fkicker">case study, GEOG 5543</div>
+        <h3>Predicting modern locations from a 1930s plat map, using OCR and a street buffer</h3>
+        <p>A scanned plat has no coordinates and handwriting that runs in every direction. This walks through using an ordinary GIS buffer to narrow an OCR problem, then matching what's left against the modern street network.</p>
+        <span class="flink">read the case study</span>
+      </div>
+    </a>
+
     <div class="tiles">
       <div class="tile t1">
         <div class="wash"></div>
@@ -385,7 +422,7 @@ ndvi = (clipped.nir - clipped.red) / (clipped.nir + clipped.red)<br>
         </div>
         <div class="nb-foot">
           <div><h3>NDVI Time Series</h3><p>Five-year vegetation trend across a reservoir watershed</p></div>
-          <a href="https://github.com/mlindqvist/gis-notebooks/blob/main/ndvi_timeseries.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/ndvi_timeseries.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
 
@@ -402,7 +439,7 @@ clf.fit(X, y)<br>
         </div>
         <div class="nb-foot">
           <div><h3>Parcel Flood Risk Model</h3><p>Classifier scoring 40k parcels for a resilience grant application</p></div>
-          <a href="https://github.com/mlindqvist/gis-notebooks/blob/main/parcel_risk_model.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/parcel_risk_model.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
 
@@ -420,7 +457,7 @@ centers = gpd.read_file(<span class="c3">"clinic_sites.geojson"</span>)<br><br>
         </div>
         <div class="nb-foot">
           <div><h3>Clinic Access Isochrones</h3><p>15-minute walk-access sheds around rural clinic sites</p></div>
-          <a href="https://github.com/mlindqvist/gis-notebooks/blob/main/isochrone_access.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/isochrone_access.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
 
@@ -437,7 +474,7 @@ img = (ee.ImageCollection(<span class="c3">"COPERNICUS/S2_SR"</span>)<br>
         </div>
         <div class="nb-foot">
           <div><h3>Land Use / Land Cover Classifier</h3><p>Random forest classification over a growing-season composite</p></div>
-          <a href="https://github.com/mlindqvist/gis-notebooks/blob/main/lulc_classifier.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/lulc_classifier.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
     </div>
@@ -450,18 +487,22 @@ img = (ee.ImageCollection(<span class="c3">"COPERNICUS/S2_SR"</span>)<br>
     </div>
     <div class="about-grid">
       <div>
-        <p>I'm a recent graduate of the University of Minnesota, with majors in Geography (GIS) and Plant Science. Now focused on the Python side of GIS, I focus on automating workflows to streamline tasks. </p>
-        <p>My background in both Plant Science and GIS equipts me with a unique toolset that allows me to solve large-scale problems with the context of scientific understanding. </p>
-        <p>Outside of work I'm usually spending time enjoying what sparked my passion for the field in the first place - the great outdoors. Hiking, kayaking, and plant identification along the way makes me feel more in tune with the landscape, and with myself. </p>
+        <p>I'm a recent graduate of the University of Minnesota, with a B.S. in Geography (GIS) and Plant Science. I focus on the Python side of GIS — automating workflows to streamline tasks that would otherwise mean a lot of manual digitizing.</p>
+        <p>My background spans both plant science and GIS, which gives me a toolset for tackling large-scale spatial problems with real scientific grounding behind them — not just the geometry, but why it matters ecologically.</p>
+        <p>Outside of work I'm usually spending time enjoying what sparked my interest in this field in the first place — the great outdoors. Hiking, kayaking, and plant identification along the way make me feel more in tune with the landscape, and with myself.</p>
         <div class="stack" style="margin-top:28px;">
-          <span>QGIS</span><span>PostGIS</span><span>GDAL</span><span>geopandas</span><span>rasterio</span><span>Google Earth Engine</span><span>Leaflet</span><span>scikit-learn</span>
+          <span>Python</span><span>R</span><span>SQL</span><span>ArcGIS Pro</span><span>ArcGIS Online</span><span>ArcPy</span><span>Google Earth Engine</span><span>QGIS</span>
+        </div>
+        <div class="resume-cta">
+          <a href="files/ajalon-peterson-resume.pdf" target="_blank" rel="noopener">Download resume (PDF)</a>
+          <span>full work history, coursework, and publications</span>
         </div>
       </div>
       <div class="stat-row">
-        <div class="stat"><div class="num">37</div><div class="lab">projects delivered</div></div>
-        <div class="stat"><div class="num">6</div><div class="lab">years in geospatial analysis</div></div>
-        <div class="stat"><div class="num">12</div><div class="lab">public notebooks published</div></div>
-        <div class="stat"><div class="num">4</div><div class="lab">municipal clients served</div></div>
+        <div class="stat"><div class="num">2</div><div class="lab">peer-reviewed publications contributed to</div></div>
+        <div class="stat"><div class="num">8</div><div class="lab">solar facilities surveyed for ecological impact</div></div>
+        <div class="stat"><div class="num">3</div><div class="lab">Dean's List terms</div></div>
+        <div class="stat"><div class="num">10+</div><div class="lab">point tree-equity gain targeted, Faribault forestry plan</div></div>
       </div>
     </div>
   </section>
@@ -470,9 +511,9 @@ img = (ee.ImageCollection(<span class="c3">"COPERNICUS/S2_SR"</span>)<br>
     <div class="contact">
       <h2>Have a dataset that needs a map, a model, or both? Let's talk.</h2>
       <div class="contact-links">
-        <a href="mailto:ajalonpeterson@gmail.com">ajalon.peterson@gmail.com</a>
-        <a href="#">github.com/ajalonpetersont</a>
-        <a href="#">linkedin.com/in/ajalon-peterson-62923b250/</a>
+        <a href="mailto:ajalon.peterson@gmail.com">ajalon.peterson@gmail.com</a>
+        <a href="https://github.com/ajalonpeterson" target="_blank" rel="noopener">github.com/ajalonpeterson</a>
+        <a href="https://www.linkedin.com/in/ajalonpeterson" target="_blank" rel="noopener">linkedin.com/in/ajalonpeterson</a>
       </div>
     </div>
   </section>
