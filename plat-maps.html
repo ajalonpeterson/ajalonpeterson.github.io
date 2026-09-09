@@ -192,11 +192,11 @@
         <p>The actual trick, and the one I'd point to as the core idea of this project: instead of trying to classify <em>which</em> lines were streets, I <strong>buffered every detected line by a fixed pixel radius and unioned the buffers together</strong>. That gives you a corridor around anything line-shaped on the page. Buffer distance was hand-tuned per plat — a bread-and-butter GIS operation, repurposed as a filter for an OCR problem instead of the usual spatial-proximity question.</p>
         <div class="fig-pair">
           <figure>
-            <img src="images/case-study/plat-buffer.png" alt="Detected street lines with buffer corridors overlaid on the plat">
+            <img src="images/plat-buffer.png" alt="Detected street lines with buffer corridors overlaid on the plat">
             <figcaption>fig. 02 — buffered street corridors (pink) over detected lines (blue)</figcaption>
           </figure>
           <figure>
-            <img src="images/case-study/plat-ocr-input.png" alt="The plat with everything outside the street buffer masked to white">
+            <img src="images/plat-ocr-input.png" alt="The plat with everything outside the street buffer masked to white">
             <figcaption>fig. 03 — everything outside the corridor masked out</figcaption>
           </figure>
         </div>
@@ -211,7 +211,7 @@
         <p>Even inside the masked region, EasyOCR missed labels that ran vertically or at an angle — a couple of the street names on this plat, including the ones running along the diagonal streets, weren't legible right-side-up. The fix was running OCR three times, rotating the image to 0°, 90°, and -90° each pass, and keeping every hit.</p>
         <p>That produces a genuinely noisy result — duplicate detections, partial words, stray characters caught in the linework:</p>
         <figure>
-          <img src="images/case-study/plat-ocr-raw.png" alt="Raw EasyOCR output showing many overlapping and noisy bounding boxes">
+          <img src="images/plat-ocr-raw.png" alt="Raw EasyOCR output showing many overlapping and noisy bounding boxes">
           <figcaption>fig. 04 — raw OCR output before cleaning, three rotation passes combined</figcaption>
         </figure>
         <p>Rather than hard-coding rules to throw results out, each detection gets a <strong>weighted rank score</strong> — OCR confidence, the ratio of uppercase characters (plat street labels are consistently all-caps), and text size, in that order of priority. Everything above a rank threshold, with a minimum length to filter out stray characters, survives; duplicates from the multi-angle passes get collapsed down to the highest-confidence version. It's a much more forgiving approach than a strict rule set, and it's what actually pulled the real street names to the top of the list.</p>
