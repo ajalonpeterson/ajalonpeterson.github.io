@@ -187,9 +187,11 @@
   .tile .photo img{width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.2) brightness(0.75);}
   .tile.t1{transition:transform .2s ease;}
   .tile.t1:hover{transform:translateY(-2px);}
+  .tile.t3{transition:transform .2s ease;}
+  .tile.t3:hover{transform:translateY(-2px);}
   .tile.t1 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
   .tile.t2 .wash{background:linear-gradient(155deg,#3f7d94,#1f3d49);}
-  .tile.t3 .wash{background:linear-gradient(155deg,#b5651d,#5f3210);}
+  .tile.t3 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
   .tile-content{position:relative; z-index:2;}
   .tile-tag{
     font-family:var(--mono); font-size:11px; opacity:0.9; margin-bottom:8px;
@@ -394,16 +396,17 @@
         </div>
         <div class="tile-meta"><span>whitebox</span><span>PyQGIS</span></div>
       </div>
-      <div class="tile t3">
+      <a href="scooter-availability.html" class="tile t3" style="color:inherit;">
+        <div class="photo"><img src="images/scooter-2024-compare.png" alt="Hot spot map of scooter and bike availability in Minneapolis"></div>
         <div class="wash"></div>
         <div class="grat"></div>
         <div class="tile-content">
-          <div class="tile-tag">transit, network analysis</div>
-          <div class="tile-title">Bus Route Accessibility Score</div>
-          <div class="tile-desc">Network analysis measuring walk-time gaps to transit stops across census block groups.</div>
+          <div class="tile-tag">spatial statistics, mobility equity</div>
+          <div class="tile-title">Scooter Availability vs. How Minneapolis Commutes</div>
+          <div class="tile-desc">Hot Spot analysis of shared scooter/bike availability, compared against ACS commuting data to see whether availability tracks existing travel patterns — and how that shifted between 2020 and 2024.</div>
         </div>
-        <div class="tile-meta"><span>networkx</span><span>geopandas</span></div>
-      </div>
+        <div class="tile-meta"><span>ArcPy</span><span>Getis-Ord Gi*</span></div>
+      </a>
     </div>
   </section>
 
