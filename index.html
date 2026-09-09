@@ -183,7 +183,11 @@
     background-size:24px 24px;
   }
   .tile .wash{position:absolute; inset:0; mix-blend-mode:normal;}
-  .tile.t1 .wash{background:linear-gradient(155deg,#5c7a4a,#333f24);}
+  .tile .photo{position:absolute; inset:0; z-index:0;}
+  .tile .photo img{width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.2) brightness(0.75);}
+  .tile.t1{transition:transform .2s ease;}
+  .tile.t1:hover{transform:translateY(-2px);}
+  .tile.t1 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
   .tile.t2 .wash{background:linear-gradient(155deg,#3f7d94,#1f3d49);}
   .tile.t3 .wash{background:linear-gradient(155deg,#b5651d,#5f3210);}
   .tile-content{position:relative; z-index:2;}
@@ -369,7 +373,8 @@
     </a>
 
     <div class="tiles">
-      <div class="tile t1">
+      <a href="qatar-change-detection.html" class="tile t1" style="color:inherit;">
+        <div class="photo"><img src="images/qatar-stadium974.png" alt="Grayscale satellite change map of Stadium 974, Qatar"></div>
         <div class="wash"></div>
         <div class="grat"></div>
         <div class="tile-content">
@@ -378,7 +383,7 @@
           <div class="tile-desc">Scripted an ArcPy pipeline differencing Sentinel-2 composites from 2016, 2022, and 2025, then automated a cartographic map series exporting change maps for all seven stadiums as one reproducible PDF.</div>
         </div>
         <div class="tile-meta"><span>ArcPy</span><span>ArcGIS Pro</span></div>
-      </div>
+      </a>
       <div class="tile t2">
         <div class="wash"></div>
         <div class="grat"></div>
