@@ -340,7 +340,7 @@
     <div class="hero-grid">
       <div>
         <div class="coord-tag">44.98722°N, -93.25444°W — based in Northeast Minneapolis</div>
-        <h1>I turn raw spatial data into <em>answers to real problems.</em></h1>
+        <h1>I turn raw spatial data into <em>decisions people can act on.</em></h1>
         <div class="hero-rule"></div>
         <p class="lede">Geospatial analyst working across QGIS, PostGIS and Python. I build reproducible notebooks for land cover classification, hydrology, and urban growth modeling — then package the findings so planners and non-technical stakeholders can actually use them. Most weekends I'm out testing the terrain myself, on foot or by kayak.</p>
         <div class="hero-actions">
@@ -438,19 +438,20 @@ ndvi = (clipped.nir - clipped.red) / (clipped.nir + clipped.red)<br>
       </div>
 
       <div class="nb-card">
-        <div class="nb-top"><span>parcel_risk_model.ipynb</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
+        <div class="nb-top"><span>LiDARtoDSM.pyt</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
         <div class="nb-body">
-<span class="c1">from</span> sklearn.ensemble <span class="c1">import</span> RandomForestClassifier<br><br>
-<span class="cmt"># features: slope, distance to floodplain, soil class</span><br>
-X = parcels[[<span class="c3">"slope"</span>, <span class="c3">"fld_dist"</span>, <span class="c3">"soil_k"</span>]]<br>
-y = parcels[<span class="c3">"flood_flag"</span>]<br><br>
-clf = RandomForestClassifier(n_estimators=<span class="c3">300</span>)<br>
-clf.fit(X, y)<br>
-<span class="c2">parcels[</span><span class="c3">"risk_score"</span><span class="c2">] = clf.predict_proba(X)[:,</span><span class="c3">1</span><span class="c2">]</span>
+<span class="c1">class</span> LiDARProcessingDSM(object):<br>
+&nbsp;&nbsp;<span class="cmt"># filter to first returns, interpolate a DSM</span><br>
+&nbsp;&nbsp;arcpy.management.MakeLasDatasetLayer(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;in_las_dataset=lasd_path,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;out_layer=<span class="c3">"dsm_filter_layer"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return_values=[<span class="c3">'1'</span>]<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;<span class="c2">arcpy.conversion.LasDatasetToRaster(...)</span>
         </div>
         <div class="nb-foot">
-          <div><h3>Parcel Flood Risk Model</h3><p>Classifier scoring 40k parcels for a resilience grant application</p></div>
-          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/parcel_risk_model.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <div><h3>LiDAR-to-DSM Toolbox</h3><p>Custom ArcGIS Python Toolbox: downloads LAZ tiles, decompresses to LAS, and builds a DSM raster</p></div>
+          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/LiDARtoDSM.pyt" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
 
