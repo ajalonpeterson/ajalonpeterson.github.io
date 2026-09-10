@@ -189,8 +189,10 @@
   .tile.t1:hover{transform:translateY(-2px);}
   .tile.t3{transition:transform .2s ease;}
   .tile.t3:hover{transform:translateY(-2px);}
+  .tile.t2{transition:transform .2s ease;}
+  .tile.t2:hover{transform:translateY(-2px);}
   .tile.t1 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
-  .tile.t2 .wash{background:linear-gradient(155deg,#3f7d94,#1f3d49);}
+  .tile.t2 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
   .tile.t3 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
   .tile-content{position:relative; z-index:2;}
   .tile-tag{
@@ -386,16 +388,17 @@
         </div>
         <div class="tile-meta"><span>ArcPy</span><span>ArcGIS Pro</span></div>
       </a>
-      <div class="tile t2">
+      <a href="solar-suitability.html" class="tile t2" style="color:inherit;">
+        <div class="photo"><img src="images/solar-audubon-parcel.png" alt="Top-ranked solar suitability parcel near Audubon, Minnesota"></div>
         <div class="wash"></div>
         <div class="grat"></div>
         <div class="tile-content">
-          <div class="tile-tag">hydrology, DEM analysis</div>
-          <div class="tile-title">Watershed Delineation Tool</div>
-          <div class="tile-desc">Automated flow-direction and pour-point analysis from DEM tiles, packaged as a reusable QGIS plugin.</div>
+          <div class="tile-tag">site suitability, renewable energy</div>
+          <div class="tile-title">Ranking Minnesota's Best Sites for Utility-Scale Solar</div>
+          <div class="tile-desc">A weighted GIS model combining land cover, parcel size, slope, aspect, and road proximity to rank candidate solar sites statewide — with real limitations named directly rather than smoothed over.</div>
         </div>
-        <div class="tile-meta"><span>whitebox</span><span>PyQGIS</span></div>
-      </div>
+        <div class="tile-meta"><span>ArcPy</span><span>Multi-criteria analysis</span></div>
+      </a>
       <a href="scooter-availability.html" class="tile t3" style="color:inherit;">
         <div class="photo"><img src="images/scooter-2024-compare.png" alt="Hot spot map of scooter and bike availability in Minneapolis"></div>
         <div class="wash"></div>
