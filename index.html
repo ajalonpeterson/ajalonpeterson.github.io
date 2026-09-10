@@ -70,10 +70,9 @@
   }
   nav.links a:hover::after{transform:scaleX(1);}
   nav.links a.resume-link{
-    font-family:var(--mono); font-size:12.5px; color:var(--contour); border:1px solid var(--contour); padding:7px 14px;
+    font-family:var(--mono); font-size:12.5px; color:var(--contour);
   }
-  nav.links a.resume-link::after{display:none;}
-  nav.links a.resume-link:hover{background:var(--contour); color:var(--ink);}
+  nav.links a.resume-link:hover{color:var(--contour);}
   .menu-btn{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:0;}
   .menu-btn span{width:24px; height:2px; background:var(--paper);}
 
@@ -84,7 +83,9 @@
   .coord-tag{
     font-family:var(--mono); font-size:12.5px; color:var(--contour);
     margin-bottom:26px;
+    display:inline-flex; align-items:center; gap:8px;
   }
+  .coord-tag svg{flex-shrink:0; opacity:0.9;}
   h1{
     font-size:50px; font-weight:700; letter-spacing:-0.01em; line-height:1.1;
     max-width:820px; color:var(--paper);
@@ -116,6 +117,9 @@
   }
   .field-photo{
     border:1px solid var(--line);
+    transform:rotate(-1deg);
+    margin-top:38px;
+    box-shadow:0 24px 40px -26px rgba(0,0,0,0.65);
   }
   .field-photo .frame{
     aspect-ratio:4/5; overflow:hidden; position:relative;
@@ -133,6 +137,7 @@
   .field-photo .caption{
     padding:12px 14px; font-family:var(--mono); font-size:11px; color:var(--paper-dim);
     display:flex; justify-content:space-between; border-top:1px solid var(--line);
+    background:var(--ink-soft);
   }
 
   section{padding:88px 0; border-bottom:1px solid var(--line); position:relative; z-index:1;}
@@ -269,7 +274,7 @@
     nav.links{display:none;}
     .menu-btn{display:flex;}
     .hero-grid{grid-template-columns:1fr;}
-    .field-photo{max-width:280px;}
+    .field-photo{max-width:280px; transform:none; margin-top:0; box-shadow:none;}
     .tiles{grid-template-columns:1fr;}
     .nb-grid{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr; gap:30px;}
@@ -323,18 +328,22 @@
   <section class="hero" style="border-top:none; padding-top:96px;">
     <div class="hero-grid">
       <div>
-        <div class="coord-tag">44.98722°N, -93.25444°W — based in Northeast Minneapolis</div>
-        <h1>I turn raw spatial data into <em>decisions people can act on.</em></h1>
+        <div class="coord-tag">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="5.3"/><path d="M8 0.8v3.4M8 11.8v3.4M0.8 8h3.4M11.8 8h3.4"/></svg>
+          44.98722°N, 93.25444°W
+        </div>
+        <h1>I turn field data and satellite imagery into <em>decisions people can act on.</em></h1>
         <div class="hero-rule"></div>
         <p class="lede">Recent University of Minnesota grad in Geography (GIS) and Plant Science. I build reproducible Python notebooks and try to make the
-output legible to whoever actually needs it, not just other GIS people. I enjoy solving real-world problems through spatial analysis, and approach them with a focus on usability and impact.</p>
+output legible to whoever actually needs it, not just other GIS people. Most
+weekends I'm out testing the terrain myself by hiking. </p>
       </div>
       <div class="field-photo">
         <div class="frame">
           <img src="images/profilepic.jpg" alt="Ajalon Peterson">
         </div>
         <div class="caption">
-          <span>fig. 01</span>
+          <span>47.97°N, 123.50°W</span>
           <span>Olympic National Park, WA</span>
         </div>
       </div>
