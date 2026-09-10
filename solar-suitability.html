@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking Minnesota's Best Solar Sites — Ajalon Peterson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221f1a;
+    --ink-soft:#312b22;
+    --paper:#f4eee0;
+    --paper-dim:#cdbfa0;
+    --contour:#5c7a4a;
+    --amber:#b5651d;
+    --water:#3f7d94;
+    --line: rgba(244,238,224,0.14);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink); color:var(--paper); font-family:var(--sans);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 40px;}
+
+  header{padding:34px 0;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .mark{display:flex; align-items:center; gap:12px;}
+  .mark-glyph{width:28px; height:28px; position:relative;}
+  .mark-glyph svg{width:100%; height:100%;}
+  .mark-glyph svg{width:100%; height:100%;}
+  .mark-name{font-weight:600; font-size:15px;}
+  .mark-name .sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--paper-dim); margin-top:1px;}
+  .back-link{font-family:var(--mono); font-size:13px; color:var(--paper-dim); border-bottom:1px solid transparent;}
+  .back-link:hover{color:var(--paper); border-color:var(--paper-dim);}
+
+  .kicker{font-family:var(--mono); font-size:12.5px; color:var(--contour); margin-bottom:20px;}
+  h1{font-size:44px; font-weight:700; line-height:1.12; letter-spacing:-0.01em; margin-bottom:20px; max-width:760px;}
+  .dek{font-size:17px; color:var(--paper-dim); line-height:1.7; max-width:640px; margin-bottom:10px;}
+  .meta-row{
+    display:flex; gap:28px; flex-wrap:wrap; margin:34px 0 50px;
+    font-family:var(--mono); font-size:12.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:16px 0;
+  }
+  .meta-row div span{display:block; color:var(--paper); font-size:13.5px; margin-top:3px;}
+
+  .hero-figure{border:1px solid var(--line); margin-bottom:50px;}
+  .hero-figure img{width:100%; display:block;}
+  .hero-figure .cap{
+    padding:12px 16px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line); display:flex; justify-content:space-between;
+  }
+
+  section{padding:50px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-size:26px; font-weight:600; margin-bottom:20px; letter-spacing:-0.01em;}
+  h3{font-size:17px; font-weight:600; margin:26px 0 10px;}
+  p{color:var(--paper-dim); font-size:15.5px; line-height:1.8; margin-bottom:16px; max-width:680px;}
+  p strong{color:var(--paper); font-weight:500;}
+  code{
+    font-family:var(--mono); font-size:0.87em; background:var(--ink-soft);
+    padding:1px 6px; border:1px solid var(--line); color:var(--water);
+  }
+  ul.plain{margin:0 0 16px 0; max-width:680px;}
+  ul.plain li{
+    color:var(--paper-dim); font-size:15px; line-height:1.75; padding-left:18px; position:relative; margin-bottom:6px;
+  }
+  ul.plain li::before{content:'—'; position:absolute; left:0; color:var(--contour);}
+
+  figure{margin:22px 0; border:1px solid var(--line);}
+  figure img{width:100%; display:block;}
+  figcaption{
+    padding:10px 14px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line);
+  }
+
+  .honest{
+    background:var(--ink-soft); border:1px solid var(--line); padding:26px 28px; margin:22px 0;
+  }
+  .honest h3{margin-top:0; color:var(--amber);}
+
+  .files{display:flex; flex-direction:column; gap:0; margin-top:10px; max-width:680px;}
+  .file-row{
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .file-row:first-child{border-top:1px solid var(--line);}
+  .file-row .fname{font-size:15px; color:var(--paper);}
+  .file-row .fdesc{font-family:var(--mono); font-size:12px; color:var(--paper-dim); margin-top:3px;}
+  .file-link{
+    font-family:var(--mono); font-size:12.5px; color:var(--contour); white-space:nowrap;
+    border-bottom:1px solid var(--contour); padding-bottom:1px;
+  }
+
+  footer{padding:30px 0 60px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim); display:flex; justify-content:space-between;}
+
+  @media (max-width: 680px){
+    .wrap{padding:0 22px;}
+    h1{font-size:32px;}
+    .meta-row{gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="nav-row">
+      <div class="mark">
+        <div class="mark-glyph">
+          <svg viewBox="0 0 26 26" fill="none" stroke="#5c7a4a" stroke-width="1.3">
+            <circle cx="13" cy="13" r="9"/>
+            <path d="M13 1 V7 M13 19 V25 M1 13 H7 M19 13 H25"/>
+            <circle cx="13" cy="13" r="1.4" fill="#5c7a4a"/>
+          </svg>
+        </div>
+        <div class="mark-name">Ajalon Peterson
+          <span class="sub">Geospatial analyst, Python + GIS</span>
+        </div>
+      </div>
+      <a href="index.html" class="back-link">&larr; back to portfolio</a>
+    </div>
+  </header>
+
+  <div class="kicker">project — GIS 5571, multi-criteria site suitability</div>
+  <h1>Ranking Minnesota's best sites for utility-scale solar - and being upfront about the ranking's limits.</h1>
+  <p class="dek">A weighted GIS model combining land cover, parcel size, slope, aspect, and road proximity into a single suitability score for candidate solar sites statewide, built under a real semester deadline with real unresolved questions about how sound the final ranking actually is.</p>
+
+  <div class="meta-row">
+    <div>Data<span>NLCD land cover, 30m DEM, opt-in county parcels, TIGER/Line roads</span></div>
+    <div>Tools<span>ArcPy, ArcGIS Pro, Spatial Analyst</span></div>
+    <div>Coverage<span>59 of 87 Minnesota counties</span></div>
+  </div>
+
+  <div class="hero-figure">
+    <img src="images/solar-audubon-parcel.png" alt="The top-ranked parcel from the analysis, shown on a street map near Audubon, Minnesota">
+    <div class="cap"><span>fig. 01</span><span>the #1-ranked parcel, a real ~30+ acre property just north of Audubon, MN</span></div>
+  </div>
+
+  <section>
+    <h2>The goal</h2>
+    <p>Most solar suitability resources I looked at before starting combined only a couple of factors - elevation and aspect, typically. The goal here was to combine more of what actually matters for siting a utility-scale array: available acreage, slope, aspect, land cover, and proximity to roads and transmission infrastructure. I also wanted the whole pipeline automated end to end.</p>
+    <p>Neither of those fully happened. Transmission line proximity and solar irradiation data were part of the original plan and never made it into the final model - there simply wasn't time. And the land cover reclassification step, which I'd hoped to run entirely in ArcPy, kept failing for reasons I still don't fully understand, so I ended up doing that one step by hand in ArcGIS Pro's interface instead of in code.</p>
+  </section>
+
+  <section>
+    <h2>The approach</h2>
+    <p>Two hard constraints come first: parcels have to be at least 30 acres, and land cover has to fall into a suitable class (developed open space, shrub/scrub, grassland, pasture, or cultivated crops). Everything that passes both filters gets scored on three weighted factors - percent suitable land cover, percent low-slope area, percent south-facing area - minus a penalty for parcels with a lot of major road running through them.</p>
+    <figure>
+      <img src="images/solar-dataflow.png" alt="Data flow diagram showing the full pipeline from raw NLCD, parcel, roads, and DEM data through to the top 10 solar site layer">
+      <figcaption>fig. 02 — the full pipeline, from raw data to ranked output</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>The actual results</h2>
+    <p>Here's the real output table for the top 10 ranked parcels:</p>
+    <figure>
+      <img src="images/solar-top10-table.png" alt="Attribute table showing the top 10 ranked parcels with their suitability scores">
+      <figcaption>fig. 03 — top 10 parcels by final_score, with every scoring field visible</figcaption>
+    </figure>
+    <p>Two things stand out looking at this honestly, rather than just presenting it as a clean top-10 list:</p>
+    <ul class="plain">
+      <li>All ten final scores sit within about one point of each other on a roughly 100-point scale (83.97 to 84.93). That's a tight cluster - tight enough that small changes to the weighting could plausibly reorder who's in the top 10, which is exactly the kind of thing a sensitivity analysis is for.</li>
+      <li>Every single one of the top 10 shows a null value for <code>SUM_road_m</code>, meaning the road-proximity penalty contributed exactly zero to any of these ten scores. That could be a genuine pattern - large rural parcels tend to sit away from TIGER-classified primary and secondary roads - or it could point to a join that silently failed for a subset of parcels. I haven't tracked down which, and I think that's worth saying plainly rather than glossing over.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What I'd actually change</h2>
+    <p>From my own reflection on this project, written right after finishing it:</p>
+    <ul class="plain">
+      <li><strong>Acreage itself isn't in the final ranking.</strong> It's used as a hard cutoff (30+ acres) but never as a scored factor - which is a real gap, since larger parcels matter a lot for how much capacity a site can actually support.</li>
+      <li><strong>I'm not entirely convinced the final ranking is mathematically sound.</strong> I went back and forth a lot on which variables deserved hard constraints versus soft weights, and how much each weight should count. That uncertainty is the direct reason a sensitivity analysis got added to the notebook afterward - testing how much the top-10 list actually depends on the specific weights chosen felt like the honest way to answer that question instead of just asserting the ranking is right.</li>
+      <li><strong>The notebook isn't reproducible on another machine as it stands</strong> - paths are hardcoded to my own project folder, and the workflow depends on ArcGIS Pro being open with the right project already loaded. Relative paths, a packaged data folder, and more print-statement checkpoints would be the fix.</li>
+      <li><strong>Time was the dominant constraint</strong>, not skill or interest - this landed during a 19-credit finals week, and the automated multi-page layout with summary statistics that was supposed to accompany the ranked output never got built.</li>
+    </ul>
+
+    <div class="honest">
+      <h3>On "is this mathematically sound"</h3>
+      <p>Short answer: not fully validated yet, and I think it's more useful to say that directly than to imply otherwise. The weights (45% land cover, 30% slope, 10% aspect, minus a 15% road penalty) reflect a reasonable but subjective prioritization, not a value derived from literature or a formal method like pairwise AHP comparison. The notebook now includes a sensitivity analysis that tests how much the top-10 result actually depends on that specific choice of weights - the real next step is running it against the actual output and reporting what it finds, rather than presenting one ranking as the final word.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Get the files</h2>
+    <div class="files">
+      <div class="file-row">
+        <div><div class="fname">Notebook (.ipynb)</div><div class="fdesc">full ArcPy pipeline, cleaned up and bug-fixed, includes the sensitivity analysis</div></div>
+        <a href="#" class="file-link">view on GitHub</a>
+      </div>
+      <div class="file-row">
+        <div><div class="fname">Full writeup (PDF)</div><div class="fdesc">data sources, data flow diagram, and reflection questions</div></div>
+        <a href="#" class="file-link">download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Ajalon Peterson</span>
+    <span>MN DNR / U.S. Census TIGER/Line / NLCD</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

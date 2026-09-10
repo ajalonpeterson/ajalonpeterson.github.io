@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapping Change Around Qatar's World Cup Stadiums — Ajalon Peterson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221f1a;
+    --ink-soft:#312b22;
+    --paper:#f4eee0;
+    --paper-dim:#cdbfa0;
+    --contour:#5c7a4a;
+    --amber:#b5651d;
+    --water:#3f7d94;
+    --line: rgba(244,238,224,0.14);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink); color:var(--paper); font-family:var(--sans);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 40px;}
+
+  header{padding:34px 0;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .mark{display:flex; align-items:center; gap:12px;}
+  .mark-glyph{width:28px; height:28px; position:relative;}
+  .mark-glyph svg{width:100%; height:100%;}
+  .mark-glyph svg{width:100%; height:100%;}
+  .mark-name{font-weight:600; font-size:15px;}
+  .mark-name .sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--paper-dim); margin-top:1px;}
+  .back-link{font-family:var(--mono); font-size:13px; color:var(--paper-dim); border-bottom:1px solid transparent;}
+  .back-link:hover{color:var(--paper); border-color:var(--paper-dim);}
+
+  .kicker{font-family:var(--mono); font-size:12.5px; color:var(--contour); margin-bottom:20px;}
+  h1{font-size:44px; font-weight:700; line-height:1.12; letter-spacing:-0.01em; margin-bottom:20px; max-width:760px;}
+  .dek{font-size:17px; color:var(--paper-dim); line-height:1.7; max-width:640px; margin-bottom:10px;}
+  .meta-row{
+    display:flex; gap:28px; flex-wrap:wrap; margin:34px 0 50px;
+    font-family:var(--mono); font-size:12.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:16px 0;
+  }
+  .meta-row div span{display:block; color:var(--paper); font-size:13.5px; margin-top:3px;}
+
+  .hero-figure{border:1px solid var(--line); margin-bottom:44px;}
+  .hero-figure img{width:100%; display:block;}
+  .hero-figure .cap{
+    padding:12px 16px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line); display:flex; justify-content:space-between;
+  }
+
+  .runnable-note{
+    border:1px solid var(--line); background:var(--ink-soft); padding:18px 22px; margin-bottom:50px;
+    font-size:13.5px; color:var(--paper-dim); line-height:1.7;
+  }
+  .runnable-note strong{color:var(--paper); font-weight:500;}
+
+  section{padding:50px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-size:26px; font-weight:600; margin-bottom:20px; letter-spacing:-0.01em;}
+  h3{font-size:17px; font-weight:600; margin:26px 0 10px;}
+  p{color:var(--paper-dim); font-size:15.5px; line-height:1.8; margin-bottom:16px; max-width:680px;}
+  p strong{color:var(--paper); font-weight:500;}
+  code{
+    font-family:var(--mono); font-size:0.87em; background:var(--ink-soft);
+    padding:1px 6px; border:1px solid var(--line); color:var(--water);
+  }
+  ul.plain{margin:0 0 16px 0; max-width:680px;}
+  ul.plain li{
+    color:var(--paper-dim); font-size:15px; line-height:1.75; padding-left:18px; position:relative; margin-bottom:6px;
+  }
+  ul.plain li::before{content:'—'; position:absolute; left:0; color:var(--contour);}
+
+  figure{margin:22px 0; border:1px solid var(--line);}
+  figure img{width:100%; display:block;}
+  figcaption{
+    padding:10px 14px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim);
+    border-top:1px solid var(--line);
+  }
+  .fig-pair{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0;}
+  .fig-pair figure{margin:0;}
+
+  .honest{
+    background:var(--ink-soft); border:1px solid var(--line); padding:26px 28px; margin:22px 0;
+  }
+  .honest h3{margin-top:0; color:var(--amber);}
+
+  .files{display:flex; flex-direction:column; gap:0; margin-top:10px; max-width:680px;}
+  .file-row{
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .file-row:first-child{border-top:1px solid var(--line);}
+  .file-row .fname{font-size:15px; color:var(--paper);}
+  .file-row .fdesc{font-family:var(--mono); font-size:12px; color:var(--paper-dim); margin-top:3px;}
+  .file-link{
+    font-family:var(--mono); font-size:12.5px; color:var(--contour); white-space:nowrap;
+    border-bottom:1px solid var(--contour); padding-bottom:1px;
+  }
+
+  footer{padding:30px 0 60px; font-family:var(--mono); font-size:11.5px; color:var(--paper-dim); display:flex; justify-content:space-between;}
+
+  @media (max-width: 680px){
+    .wrap{padding:0 22px;}
+    h1{font-size:32px;}
+    .fig-pair{grid-template-columns:1fr;}
+    .meta-row{gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="nav-row">
+      <div class="mark">
+        <div class="mark-glyph">
+          <svg viewBox="0 0 26 26" fill="none" stroke="#5c7a4a" stroke-width="1.3">
+            <circle cx="13" cy="13" r="9"/>
+            <path d="M13 1 V7 M13 19 V25 M1 13 H7 M19 13 H25"/>
+            <circle cx="13" cy="13" r="1.4" fill="#5c7a4a"/>
+          </svg>
+        </div>
+        <div class="mark-name">Ajalon Peterson
+          <span class="sub">Geospatial analyst, Python + GIS</span>
+        </div>
+      </div>
+      <a href="index.html" class="back-link">&larr; back to portfolio</a>
+    </div>
+  </header>
+
+  <div class="kicker">project — remote sensing / cartographic automation</div>
+  <h1>Mapping change around Qatar's World Cup stadiums, before and after the tournament.</h1>
+  <p class="dek">Eight stadiums, three satellite snapshots each, and one script that builds and exports a complete map series without touching a single layout by hand. This is as much about automating repeatable cartography as it is about what changed on the ground.</p>
+
+  <div class="meta-row">
+    <div>Imagery<span>Sentinel-2 RGB composites, 2016 / 2022 / 2025</span></div>
+    <div>Tools<span>ArcPy, ArcGIS Pro, Spatial Analyst</span></div>
+    <div>Scope<span>7 of 8 Qatar 2022 stadiums</span></div>
+  </div>
+
+  <div class="hero-figure">
+    <img src="images/qatar-stadium974.png" alt="Automated map series export for Stadium 974, including title, legend, north arrow, and scale bar">
+    <div class="cap"><span>fig. 01</span><span>one page of the automated series, exactly as the script exported it — title, legend, and north arrow included</span></div>
+  </div>
+
+  <div class="runnable-note">
+    <strong>Note on reproducing this:</strong> this pipeline runs inside ArcGIS Pro and requires a Spatial Analyst license — <code>arcpy</code> isn't installable outside that environment, and the source Sentinel-2 composites aren't included here. Unlike the plat-maps project, this one isn't something you can clone and run; it's included to show ArcPy scripting and cartographic automation, which is how a lot of enterprise GIS work actually happens.
+  </div>
+
+  <section>
+    <h2>The setup</h2>
+    <p>Qatar built or substantially renovated eight stadiums for the 2022 World Cup, several from scratch. The question here was simple: how much visibly changed at each site between 2016 (pre-construction), 2022 (tournament year), and 2025 (three years on) — and could that be shown consistently across all of them without manually building eight separate maps.</p>
+    <p>Al Bayt Stadium sits well north of the other seven and would have distorted a shared map extent, so it's excluded from this series and would need its own map on a different scale.</p>
+  </section>
+
+  <section>
+    <h2>The approach</h2>
+    <p>For each of the two comparison windows (2016→2022 and 2022→2025), the pipeline takes the absolute pixel difference between two Sentinel-2 RGB composites and converts the result to a single grayscale change-intensity band — brighter pixels mean more visible change at that location.</p>
+    <p>Official stadium locations were pulled directly from an ArcGIS Online feature service rather than digitized by hand, which kept the location data authoritative. Each point was then buffered by 1000 meters — zooming the map series directly to the raw points turned out to be unreliable, so the buffer polygon became the layer the series actually indexes on.</p>
+  </section>
+
+  <section>
+    <h2>The automation, which is the actual point</h2>
+    <p>The part worth highlighting isn't the raster math above — it's that all seven stadium maps come out of a single ArcGIS Pro layout, script-driven end to end. One <strong>Spatial Map Series</strong>, indexed on the buffer layer, iterates through every stadium automatically: the title text dynamically updates to the current stadium's name, the map frame re-centers, and the whole set exports as one 300 dpi PDF in a single run.</p>
+    <div class="fig-pair">
+      <figure>
+        <img src="images/qatar-lusail.png" alt="Automated map series export for Lusail Stadium">
+        <figcaption>fig. 02 — Lusail Stadium's page from the same series, same title block and layout, different extent and label</figcaption>
+      </figure>
+      <figure>
+        <img src="images/qatar-ahmed-bin-ali.png" alt="Automated map series export for Ahmed Bin Ali Stadium">
+        <figcaption>fig. 03 — Ahmed Bin Ali Stadium, a renovation rather than new construction, with a subtler change signature</figcaption>
+      </figure>
+    </div>
+    <p>A few real implementation snags, and how they got resolved:</p>
+    <ul class="plain">
+      <li>Editing the stadium points' symbology directly kept breaking the series' indexing — solved by duplicating the layer, so one copy handles the visual highlight marker and the original stays untouched for indexing.</li>
+      <li>Zooming directly to stadium points was unreliable across runs — replaced with the 1000m buffer approach described above.</li>
+      <li>The layout construction (title placement, north arrow, scale bar, legend) was adapted from ESRI's official layout-automation documentation and a course demonstration, then modified for this series. AI assistance was used to work out the correct symbology syntax for the highlight marker where documentation was sparse.</li>
+    </ul>
+    <div class="honest">
+      <h3>What this would need to scale further</h3>
+      <p>This runs cleanly across seven stadiums that share a common scale and imagery source. Applying it to a larger or more varied set of sites — different scales, different imagery dates, sites that need individual zoom levels — would mean making the buffer distance and map scale adaptive per site rather than fixed, which the current version doesn't do.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Get the files</h2>
+    <div class="files">
+      <div class="file-row">
+        <div><div class="fname">Notebook (.ipynb)</div><div class="fdesc">full ArcPy pipeline, cleaned up for readability — see the note above on running it</div></div>
+        <a href="#" class="file-link">view on GitHub</a>
+      </div>
+      <div class="file-row">
+        <div><div class="fname">Full map series (PDF)</div><div class="fdesc">all seven stadiums, 2016–2022 comparison</div></div>
+        <a href="#" class="file-link">download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Ajalon Peterson</span>
+    <span>Sentinel-2 imagery via Copernicus</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
