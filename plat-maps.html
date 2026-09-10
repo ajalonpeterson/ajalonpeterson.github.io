@@ -169,20 +169,20 @@
 
   <section>
     <h2>The problem</h2>
-    <p>County archives hold thousands of these plats — hand-lettered survey documents scanned as flat PDFs, with no shapefile and no coordinate reference. If you want to know what a plat like this corresponds to on a modern map, you're reading it by eye.</p>
-    <p>Running OCR on the whole page doesn't work well. Street names, block numbers, surveyor's notes, and legal boilerplate all sit in the same visual space, at every angle, in handwriting drawn a century ago. OCR reads all of it indiscriminately — signatures and stamps included — which makes the raw output nearly as unusable as not running OCR at all.</p>
-    <p>The goal here wasn't to solve that for every plat in the archive. It was to build one working pipeline, end to end, on a single plat, and be upfront about which parts of it would need rethinking to generalize.</p>
+    <p>County archives hold thousands of these plats — hand-lettered survey documents scanned as flat PDFs, with no shapefile and no coordinate reference. </p>
+    <p>Running OCR on the whole page doesn't work well. Street names, block numbers, and surveyor's notes all sit in the same visual space, at different angles, in handwriting drawn a century ago. OCR reads all of it indiscriminately, which makes the raw output nearly as unusable as not running OCR at all.</p>
+    <p>The goal here was to explore different ways to use GIS techniques to solve this problem andbuild one working pipeline on a single plat. </p>
   </section>
 
   <section>
     <h2>The pipeline</h2>
-    <p>Five stages, in order: clean the scan, isolate the geometry that matters, OCR only that region, match whatever text comes out against a modern street network, then turn the result into an actual address.</p>
+    <p>Four stages, in order: clean the scan, isolate the geometry that matters, OCR only that region, match whatever text comes out against a modern street network, then turn the result into an actual address.</p>
 
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-body">
         <h3>Minimal preprocessing</h3>
-        <p>The plat comes in as a scanned PDF and gets converted to a grayscale image — deliberately light preprocessing, since anything more aggressive at this stage risks destroying faint linework before it's even been detected.</p>
+        <p>The plat comes in as a scanned PDF and gets converted to a grayscale image — deliberately light preprocessing, since anything more aggressive at this stage risks destroying faint linework before it's been detected.</p>
       </div>
     </div>
 
@@ -191,7 +191,7 @@
       <div class="step-body">
         <h3>Isolating the streets</h3>
         <p>This part took the most iteration. An adaptive threshold turns the scan into a binary ink mask, connected-component filtering strips out small noise, and a line segment detector picks out straight linework — filtered by length and by a margin around the page border, since the border and legend box were consistently mistaken for street lines.</p>
-        <p>The core idea: instead of classifying <em>which</em> lines were streets, every detected line gets <strong>buffered by a fixed pixel radius and the buffers are unioned together</strong>. That produces a corridor around anything line-shaped on the page — a standard GIS operation, repurposed here as an OCR mask instead of the usual proximity analysis.</p>
+        <p>The core idea: instead of classifying which lines were streets, every detected line gets buffered by a fixed pixel radius and the buffers are unioned together. That produces a corridor around anything line-shaped on the page; a standard GIS operation, repurposed here as an OCR mask instead of the usual proximity analysis.</p>
         <div class="fig-pair">
           <figure>
             <img src="images/plat-buffer.png" alt="Detected street lines with buffer corridors overlaid on the plat">
@@ -202,16 +202,16 @@
             <figcaption>fig. 03 — everything outside the corridor masked out</figcaption>
           </figure>
         </div>
-        <p>Everything outside those corridors gets masked to white. What's left is mostly street labels and the linework around them — legal text, stamps, and interior lot numbers are gone before OCR ever sees the image.</p>
+        <p>Everything outside those corridors gets masked to white. What's left is mostly street labels and the linework around them; legal text, stamps, and interior lot numbers are gone before the OCR step.</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-body">
-        <h3>OCR, run for recall instead of precision</h3>
+        <h3>OCR (run for recall instead of precision)</h3>
         <p>Even inside the masked region, EasyOCR missed labels that ran diagonally — a couple of street names on this plat weren't legible right-side-up. The fix was running OCR three times, rotating the image to 0°, 90°, and -90° each pass, and keeping every hit.</p>
-        <p>That produces a genuinely noisy result — duplicate detections, partial words, stray characters caught in the linework:</p>
+        <p>That produces a noisy result with duplicate detections and partial words:</p>
         <figure>
           <img src="images/plat-ocr-raw.png" alt="Raw EasyOCR output showing many overlapping and noisy bounding boxes">
           <figcaption>fig. 04 — raw OCR output before cleaning, three rotation passes combined</figcaption>
@@ -224,7 +224,7 @@
       <div class="step-num">04</div>
       <div class="step-body">
         <h3>Matching against the modern map</h3>
-        <p>With a clean list of street names, OSMnx pulls the current street network for Saint Paul and filters it down to edges whose names match. Every matched street's endpoints then get run through <strong>DBSCAN</strong>, clustering points that sit close together in real-world distance rather than relying on modern intersections — which, a century of reconstruction later, often don't exist in the same place, or at all.</p>
+        <p>With a clean list of street names, OSMnx pulls the current street network for Saint Paul and filters it down to edges whose names match. Every matched street's endpoints then get run through DBSCAN, clustering points that sit close together in real-world distance rather than relying on modern intersections — which, a century of reconstruction later, often don't exist in the same place, or at all.</p>
         <p>The densest cluster with the most distinct matched streets gets kept, outlier points get trimmed by distance from the cluster's centroid, and what's left gets wrapped in a padded bounding box — the pipeline's best estimate of where this 1930s plat sits on a present-day map.</p>
       </div>
     </div>
@@ -233,13 +233,13 @@
       <div class="step-num">05</div>
       <div class="step-body">
         <h3>Reverse geocoding to an address</h3>
-        <p>A bounding box is a shape, not an answer. The last step reverse-geocodes the box's centroid through Nominatim to turn it into a real, human-readable location. For this plat, that comes back as <strong>Jackson Street, Frogtown, Saint Paul, Ramsey County, MN 55117</strong> — a walkable modern address, a century removed from the original survey.</p>
+        <p>A bounding box is a shape, not an answer. The last step reverse-geocodes the box's centroid through Nominatim to turn it into a real, human-readable location. For this plat, that comes back as <strong>Jackson Street, Frogtown, Saint Paul, Ramsey County, MN 55117</strong> — a modern address, 100 years after the original survey.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>What worked, and what I'd rethink</h2>
+    <h2>What worked, and what didn't</h2>
     <p>A few approaches got tried and dropped before landing on the pipeline above — worth naming, since the dead ends are as much a part of this as what worked:</p>
     <ul class="plain">
       <li>OCR on the full, unmasked image, before the buffer approach — too much non-street text got picked up, and cleaning it afterward proved harder than filtering beforehand.</li>
@@ -258,8 +258,8 @@
 
   <section>
     <h2>Why this seems worth sharing</h2>
-    <p>There's real, growing interest in pulling structured information out of historical maps — not just plats, but survey records, fire insurance maps, and other archival GIS material that mostly exists as a scanned image and nothing else. It came up directly in a conversation my professor had with the Minnesota Department of Transportation, which was part of what pushed me to write this project up rather than let it sit in a class folder.</p>
-    <p>The most useful part of this project, honestly, might not be the pipeline itself — it's the demonstration that a problem framed as "AI/OCR" can be meaningfully narrowed using ordinary spatial reasoning first. The buffer step did more work than the OCR model did.</p>
+    <p>There's real, growing interest in pulling structured information out of historical maps.</p>
+    <p>I think the most useful part of this project might not be the pipeline itself, but the demonstration that a problem framed as "AI/OCR" can be meaningfully narrowed using ordinary spatial reasoning first. The buffer step did more work than the OCR model did.</p>
   </section>
 
   <section>
