@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Predicting Modern Locations from Historical Plat Maps — Ajalon Peterdon</title>
+<title>Predicting Modern Locations from Historical Plat Maps — Mara Lindqvist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -32,7 +32,8 @@
   header{padding:34px 0;}
   .nav-row{display:flex; align-items:center; justify-content:space-between;}
   .mark{display:flex; align-items:center; gap:12px;}
-  .mark-glyph{width:34px; height:34px;}
+  .mark-glyph{width:28px; height:28px; position:relative;}
+  .mark-glyph svg{width:100%; height:100%;}
   .mark-glyph svg{width:100%; height:100%;}
   .mark-name{font-weight:600; font-size:15px;}
   .mark-name .sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--paper-dim); margin-top:1px;}
@@ -136,13 +137,13 @@
     <div class="nav-row">
       <div class="mark">
         <div class="mark-glyph">
-          <svg viewBox="0 0 40 40" fill="none">
-            <polygon points="20,3 35,12 35,28 20,37 5,28 5,12" stroke="#f4eee0" stroke-width="1.4"/>
-            <circle cx="20" cy="20" r="3.2" fill="#5c7a4a"/>
-            <path d="M20 3 V20 M35 12 L20 20 M35 28 L20 20 M20 37 V20 M5 28 L20 20 M5 12 L20 20" stroke="#f4eee0" stroke-width="0.6" opacity="0.5"/>
+          <svg viewBox="0 0 26 26" fill="none" stroke="#5c7a4a" stroke-width="1.3">
+            <circle cx="13" cy="13" r="9"/>
+            <path d="M13 1 V7 M13 19 V25 M1 13 H7 M19 13 H25"/>
+            <circle cx="13" cy="13" r="1.4" fill="#5c7a4a"/>
           </svg>
         </div>
-        <div class="mark-name">Ajalon Peterson
+        <div class="mark-name">Mara Lindqvist
           <span class="sub">Geospatial analyst, Python + GIS</span>
         </div>
       </div>
@@ -161,7 +162,7 @@
   </div>
 
   <div class="hero-figure">
-    <img src="images/plat-original.png" alt="Scanned historical plat map, Bass' Rearrangement, Ashton and Sherburne's Addition, Saint Paul">
+    <img src="images/case-study/plat-original.png" alt="Scanned historical plat map, Bass' Rearrangement, Ashton and Sherburne's Addition, Saint Paul">
     <div class="cap"><span>fig. 01</span><span>the source: a 1930s subdivision plat, Saint Paul, MN</span></div>
   </div>
 
@@ -192,11 +193,11 @@
         <p>The actual trick, and the one I'd point to as the core idea of this project: instead of trying to classify <em>which</em> lines were streets, I <strong>buffered every detected line by a fixed pixel radius and unioned the buffers together</strong>. That gives you a corridor around anything line-shaped on the page. Buffer distance was hand-tuned per plat — a bread-and-butter GIS operation, repurposed as a filter for an OCR problem instead of the usual spatial-proximity question.</p>
         <div class="fig-pair">
           <figure>
-            <img src="images/plat-buffer.png" alt="Detected street lines with buffer corridors overlaid on the plat">
+            <img src="images/case-study/plat-buffer.png" alt="Detected street lines with buffer corridors overlaid on the plat">
             <figcaption>fig. 02 — buffered street corridors (pink) over detected lines (blue)</figcaption>
           </figure>
           <figure>
-            <img src="images/plat-ocr-input.png" alt="The plat with everything outside the street buffer masked to white">
+            <img src="images/case-study/plat-ocr-input.png" alt="The plat with everything outside the street buffer masked to white">
             <figcaption>fig. 03 — everything outside the corridor masked out</figcaption>
           </figure>
         </div>
@@ -211,7 +212,7 @@
         <p>Even inside the masked region, EasyOCR missed labels that ran vertically or at an angle — a couple of the street names on this plat, including the ones running along the diagonal streets, weren't legible right-side-up. The fix was running OCR three times, rotating the image to 0°, 90°, and -90° each pass, and keeping every hit.</p>
         <p>That produces a genuinely noisy result — duplicate detections, partial words, stray characters caught in the linework:</p>
         <figure>
-          <img src="images/plat-ocr-raw.png" alt="Raw EasyOCR output showing many overlapping and noisy bounding boxes">
+          <img src="images/case-study/plat-ocr-raw.png" alt="Raw EasyOCR output showing many overlapping and noisy bounding boxes">
           <figcaption>fig. 04 — raw OCR output before cleaning, three rotation passes combined</figcaption>
         </figure>
         <p>Rather than hard-coding rules to throw results out, each detection gets a <strong>weighted rank score</strong> — OCR confidence, the ratio of uppercase characters (plat street labels are consistently all-caps), and text size, in that order of priority. Everything above a rank threshold, with a minimum length to filter out stray characters, survives; duplicates from the multi-angle passes get collapsed down to the highest-confidence version. It's a much more forgiving approach than a strict rule set, and it's what actually pulled the real street names to the top of the list.</p>
@@ -257,11 +258,11 @@
     <div class="files">
       <div class="file-row">
         <div><div class="fname">Notebook (.ipynb)</div><div class="fdesc">full pipeline, all four parts, runnable in Colab</div></div>
-        <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/plat-maps-files/plat-maps-notebook.ipynb" class="file-link">view on GitHub</a>
+        <a href="#" class="file-link">view on GitHub</a>
       </div>
       <div class="file-row">
         <div><div class="fname">README</div><div class="fdesc">notebook structure, approaches tried and dropped</div></div>
-        <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/plat-maps-files/README%20(1).ipynb" class="file-link">view on GitHub</a>
+        <a href="#" class="file-link">view on GitHub</a>
       </div>
       <div class="file-row">
         <div><div class="fname">Project writeup (PDF)</div><div class="fdesc">full explanation of methodology</div></div>
@@ -275,7 +276,7 @@
   </section>
 
   <footer>
-    <span>&copy; 2026 Ajalon Peterson</span>
+    <span>&copy; 2026 Mara Lindqvist</span>
     <span>GEOG 5543 — exploratory analysis</span>
   </footer>
 

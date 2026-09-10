@@ -32,7 +32,8 @@
   header{padding:34px 0;}
   .nav-row{display:flex; align-items:center; justify-content:space-between;}
   .mark{display:flex; align-items:center; gap:12px;}
-  .mark-glyph{width:34px; height:34px;}
+  .mark-glyph{width:28px; height:28px; position:relative;}
+  .mark-glyph svg{width:100%; height:100%;}
   .mark-glyph svg{width:100%; height:100%;}
   .mark-name{font-weight:600; font-size:15px;}
   .mark-name .sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--paper-dim); margin-top:1px;}
@@ -123,10 +124,10 @@
     <div class="nav-row">
       <div class="mark">
         <div class="mark-glyph">
-          <svg viewBox="0 0 40 40" fill="none">
-            <polygon points="20,3 35,12 35,28 20,37 5,28 5,12" stroke="#f4eee0" stroke-width="1.4"/>
-            <circle cx="20" cy="20" r="3.2" fill="#5c7a4a"/>
-            <path d="M20 3 V20 M35 12 L20 20 M35 28 L20 20 M20 37 V20 M5 28 L20 20 M5 12 L20 20" stroke="#f4eee0" stroke-width="0.6" opacity="0.5"/>
+          <svg viewBox="0 0 26 26" fill="none" stroke="#5c7a4a" stroke-width="1.3">
+            <circle cx="13" cy="13" r="9"/>
+            <path d="M13 1 V7 M13 19 V25 M1 13 H7 M19 13 H25"/>
+            <circle cx="13" cy="13" r="1.4" fill="#5c7a4a"/>
           </svg>
         </div>
         <div class="mark-name">Ajalon Peterson
@@ -198,11 +199,11 @@
     <div class="files">
       <div class="file-row">
         <div><div class="fname">Notebook (.ipynb)</div><div class="fdesc">full ArcPy pipeline, cleaned up for readability — see the note above on running it</div></div>
-        <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/qatar-files/qatar-change-detection-notebook.ipynb" class="file-link">view on GitHub</a>
+        <a href="#" class="file-link">view on GitHub</a>
       </div>
       <div class="file-row">
         <div><div class="fname">Full map series (PDF)</div><div class="fdesc">all seven stadiums, 2016–2022 comparison</div></div>
-        <a href="qatar-files/Stadium_Map_Series.pdf" class="file-link">download</a>
+        <a href="#" class="file-link">download</a>
       </div>
     </div>
   </section>
