@@ -170,41 +170,24 @@
   }
 
   .tile{
-    position:relative; aspect-ratio:4/5; overflow:hidden;
-    border:1px solid var(--line);
-    display:flex; flex-direction:column; justify-content:flex-end;
-    padding:26px;
+    border:1px solid var(--line); background:var(--ink-soft);
+    display:flex; flex-direction:column;
+    transition:transform .2s ease;
   }
-  .tile .grat{
-    position:absolute; inset:0; opacity:0.5;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:24px 24px;
-  }
-  .tile .wash{position:absolute; inset:0; mix-blend-mode:normal;}
-  .tile .photo{position:absolute; inset:0; z-index:0;}
-  .tile .photo img{width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.2) brightness(0.75);}
-  .tile.t1{transition:transform .2s ease;}
-  .tile.t1:hover{transform:translateY(-2px);}
-  .tile.t3{transition:transform .2s ease;}
-  .tile.t3:hover{transform:translateY(-2px);}
-  .tile.t2{transition:transform .2s ease;}
-  .tile.t2:hover{transform:translateY(-2px);}
-  .tile.t1 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
-  .tile.t2 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
-  .tile.t3 .wash{background:linear-gradient(200deg, rgba(34,31,26,0.15) 0%, rgba(34,31,26,0.92) 78%);}
-  .tile-content{position:relative; z-index:2;}
+  .tile:hover{transform:translateY(-2px);}
+  .tile .thumb{aspect-ratio:16/9; overflow:hidden; border-bottom:1px solid var(--line);}
+  .tile .thumb img{width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.15);}
+  .tile-content{padding:22px;}
   .tile-tag{
-    font-family:var(--mono); font-size:11px; opacity:0.9; margin-bottom:8px;
+    font-family:var(--mono); font-size:11px; color:var(--contour); opacity:0.9; margin-bottom:8px;
     display:inline-flex; align-items:center; gap:7px;
   }
   .tile-tag::before{content:''; width:11px; height:1px; background:currentColor; display:inline-block;}
-  .tile-title{font-size:20px; font-weight:600; margin-bottom:10px;}
-  .tile-desc{font-size:13px; color:rgba(242,239,230,0.82); max-width:230px; line-height:1.5;}
+  .tile-title{font-size:18px; font-weight:600; margin-bottom:10px; color:var(--paper);}
+  .tile-desc{font-size:13.5px; color:var(--paper-dim); line-height:1.6;}
   .tile-meta{
-    position:relative; z-index:2; display:flex; gap:14px; margin-top:16px;
-    font-family:var(--mono); font-size:11px; color:rgba(242,239,230,0.75);
+    display:flex; gap:14px; margin-top:14px; padding:0 22px 22px;
+    font-family:var(--mono); font-size:11px; color:var(--paper-dim);
   }
 
   .nb-grid{
@@ -363,24 +346,12 @@
   <section id="work">
     <div class="section-head">
       <h2>Selected work</h2>
-      <p>A case study, plus three recent projects spanning remote sensing, hydrology, and municipal planning.</p>
+      <p>Three recent projects spanning remote sensing, renewable siting, and historical map analysis.</p>
     </div>
-
-    <a href="plat-maps.html" class="featured" style="display:grid; color:inherit;">
-      <div class="fimg"><img src="images/plat-buffer.png" alt="Street buffer corridors overlaid on a historical plat map"></div>
-      <div class="fbody">
-        <div class="fkicker">case study, GEOG 5543</div>
-        <h3>Predicting modern locations from a 1930s plat map, using OCR and a street buffer</h3>
-        <p>A scanned plat has no coordinates and handwriting that runs in every direction. This walks through using an ordinary GIS buffer to narrow an OCR problem, then matching what's left against the modern street network.</p>
-        <span class="flink">read the case study</span>
-      </div>
-    </a>
 
     <div class="tiles">
       <a href="qatar-change-detection.html" class="tile t1" style="color:inherit;">
-        <div class="photo"><img src="images/qatar-stadium974.png" alt="Grayscale satellite change map of Stadium 974, Qatar"></div>
-        <div class="wash"></div>
-        <div class="grat"></div>
+        <div class="thumb"><img src="images/qatar-stadium974.png" alt="Grayscale satellite change map of Stadium 974, Qatar"></div>
         <div class="tile-content">
           <div class="tile-tag">remote sensing, change detection</div>
           <div class="tile-title">Mapping Change Around Qatar's World Cup Stadiums</div>
@@ -389,9 +360,7 @@
         <div class="tile-meta"><span>ArcPy</span><span>ArcGIS Pro</span></div>
       </a>
       <a href="solar-suitability.html" class="tile t2" style="color:inherit;">
-        <div class="photo"><img src="images/solar-audubon-parcel.png" alt="Top-ranked solar suitability parcel near Audubon, Minnesota"></div>
-        <div class="wash"></div>
-        <div class="grat"></div>
+        <div class="thumb"><img src="images/solar-audubon-parcel.png" alt="Top-ranked solar suitability parcel near Audubon, Minnesota"></div>
         <div class="tile-content">
           <div class="tile-tag">site suitability, renewable energy</div>
           <div class="tile-title">Ranking Minnesota's Best Sites for Utility-Scale Solar</div>
@@ -399,16 +368,14 @@
         </div>
         <div class="tile-meta"><span>ArcPy</span><span>Multi-criteria analysis</span></div>
       </a>
-      <a href="scooter-availability.html" class="tile t3" style="color:inherit;">
-        <div class="photo"><img src="images/scooter-2024-compare.png" alt="Hot spot map of scooter and bike availability in Minneapolis"></div>
-        <div class="wash"></div>
-        <div class="grat"></div>
+      <a href="plat-maps.html" class="tile t3" style="color:inherit;">
+        <div class="thumb"><img src="images/plat-buffer.png" alt="Street buffer corridors overlaid on a historical plat map"></div>
         <div class="tile-content">
-          <div class="tile-tag">spatial statistics, mobility equity</div>
-          <div class="tile-title">Scooter Availability vs. How Minneapolis Commutes</div>
-          <div class="tile-desc">Hot Spot analysis of shared scooter/bike availability, compared against ACS commuting data to see whether availability tracks existing travel patterns — and how that shifted between 2020 and 2024.</div>
+          <div class="tile-tag">OCR, historical maps</div>
+          <div class="tile-title">Predicting Modern Locations from a 1930s Plat Map</div>
+          <div class="tile-desc">A scanned plat has no coordinates and handwriting that runs in every direction. Uses an ordinary GIS buffer to narrow an OCR problem, then matches what's left against the modern street network.</div>
         </div>
-        <div class="tile-meta"><span>ArcPy</span><span>Getis-Ord Gi*</span></div>
+        <div class="tile-meta"><span>EasyOCR</span><span>OpenCV</span></div>
       </a>
     </div>
   </section>
@@ -420,20 +387,18 @@
     </div>
     <div class="nb-grid">
       <div class="nb-card">
-        <div class="nb-top"><span>ndvi_timeseries.ipynb</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
+        <div class="nb-top"><span>scooter-availability.ipynb</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
         <div class="nb-body">
-<span class="c1">import</span> geopandas <span class="c1">as</span> gpd<br>
-<span class="c1">import</span> rioxarray <span class="c1">as</span> rxr<br><br>
-<span class="cmt"># load and clip Sentinel-2 stack to AOI</span><br>
-aoi = gpd.read_file(<span class="c3">"aoi.geojson"</span>)<br>
-stack = rxr.open_rasterio(<span class="c3">"s2_stack.tif"</span>)<br>
-clipped = stack.rio.clip(aoi.geometry)<br><br>
-ndvi = (clipped.nir - clipped.red) / (clipped.nir + clipped.red)<br>
-<span class="c2">ndvi.plot(cmap=</span><span class="c3">"RdYlGn"</span><span class="c2">)</span>
+<span class="c1">arcpy.stats.HotSpots(</span><br>
+&nbsp;&nbsp;Input_Feature_Class=<span class="c3">"Street_Centroids_1"</span>,<br>
+&nbsp;&nbsp;Input_Field=<span class="c3">"SUM_NumberAvailable"</span>,<br>
+&nbsp;&nbsp;Output_Feature_Class=<span class="c3">"HotSpot_SUM"</span>,<br>
+&nbsp;&nbsp;<span class="cmt"># fixed distance band, Manhattan distance</span><br>
+&nbsp;&nbsp;Distance_Method=<span class="c3">"MANHATTAN_DISTANCE"</span><span class="c2">)</span>
         </div>
         <div class="nb-foot">
-          <div><h3>NDVI Time Series</h3><p>Five-year vegetation trend across a reservoir watershed</p></div>
-          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/ndvi_timeseries.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
+          <div><h3>Scooter Availability vs. How Minneapolis Commutes</h3><p>Hot Spot analysis of scooter/bike availability, compared against ACS commuting data</p></div>
+          <a href="scooter-availability.html" class="nb-link">read the analysis</a>
         </div>
       </div>
 
@@ -452,41 +417,6 @@ ndvi = (clipped.nir - clipped.red) / (clipped.nir + clipped.red)<br>
         <div class="nb-foot">
           <div><h3>LiDAR-to-DSM Toolbox</h3><p>Custom ArcGIS Python Toolbox: downloads LAZ tiles, decompresses to LAS, and builds a DSM raster</p></div>
           <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/gis-notebooks/LiDARtoDSM.pyt" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
-        </div>
-      </div>
-
-      <div class="nb-card">
-        <div class="nb-top"><span>isochrone_access.ipynb</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
-        <div class="nb-body">
-<span class="c1">import</span> osmnx <span class="c1">as</span> ox<br>
-<span class="c1">import</span> networkx <span class="c1">as</span> nx<br><br>
-<span class="cmt"># pull walk network, build 15-min isochrones</span><br>
-G = ox.graph_from_place(<span class="c3">"Eau Claire, WI"</span>, network_type=<span class="c3">"walk"</span>)<br>
-centers = gpd.read_file(<span class="c3">"clinic_sites.geojson"</span>)<br><br>
-<span class="c1">for</span> pt <span class="c1">in</span> centers.geometry:<br>
-&nbsp;&nbsp;node = ox.distance.nearest_nodes(G, pt.x, pt.y)<br>
-&nbsp;&nbsp;<span class="c2">subgraph = nx.ego_graph(G, node, radius=</span><span class="c3">900</span><span class="c2">)</span>
-        </div>
-        <div class="nb-foot">
-          <div><h3>Clinic Access Isochrones</h3><p>15-minute walk-access sheds around rural clinic sites</p></div>
-          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/isochrone_access.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
-        </div>
-      </div>
-
-      <div class="nb-card">
-        <div class="nb-top"><span>lulc_classifier.ipynb</span><div class="nb-dots"><span></span><span></span><span></span></div></div>
-        <div class="nb-body">
-<span class="c1">import</span> ee<br>
-ee.Initialize()<br><br>
-<span class="cmt"># composite + classify a Sentinel-2 scene in GEE</span><br>
-img = (ee.ImageCollection(<span class="c3">"COPERNICUS/S2_SR"</span>)<br>
-&nbsp;&nbsp;.filterBounds(aoi).filterDate(<span class="c3">"2025-06-01"</span>, <span class="c3">"2025-09-01"</span>)<br>
-&nbsp;&nbsp;.median())<br><br>
-<span class="c2">classified = img.classify(trained_clf)</span>
-        </div>
-        <div class="nb-foot">
-          <div><h3>Land Use / Land Cover Classifier</h3><p>Random forest classification over a growing-season composite</p></div>
-          <a href="https://github.com/ajalonpeterson/gis-notebooks/blob/main/lulc_classifier.ipynb" class="nb-link" target="_blank" rel="noopener">view on GitHub</a>
         </div>
       </div>
     </div>
