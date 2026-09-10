@@ -131,7 +131,7 @@
           </svg>
         </div>
         <div class="mark-name">Ajalon Peterson
-          <span class="sub">Geospatial analyst, Python + GIS</span>
+          <span class="sub">B.S. Geography (GIS) + Plant Science, University of Minnesota</span>
         </div>
       </div>
       <a href="index.html" class="back-link">&larr; back to portfolio</a>
@@ -153,10 +153,6 @@
     <div class="cap"><span>fig. 01</span><span>one page of the automated series, exactly as the script exported it — title, legend, and north arrow included</span></div>
   </div>
 
-  <div class="runnable-note">
-    <strong>Note on reproducing this:</strong> this pipeline runs inside ArcGIS Pro and requires a Spatial Analyst license — <code>arcpy</code> isn't installable outside that environment, and the source Sentinel-2 composites aren't included here. Unlike the plat-maps project, this one isn't something you can clone and run; it's included to show ArcPy scripting and cartographic automation, which is how a lot of enterprise GIS work actually happens.
-  </div>
-
   <section>
     <h2>The setup</h2>
     <p>Qatar built or substantially renovated eight stadiums for the 2022 World Cup, several from scratch. The question here was simple: how much visibly changed at each site between 2016 (pre-construction), 2022 (tournament year), and 2025 (three years on) — and could that be shown consistently across all of them without manually building eight separate maps.</p>
@@ -166,12 +162,12 @@
   <section>
     <h2>The approach</h2>
     <p>For each of the two comparison windows (2016→2022 and 2022→2025), the pipeline takes the absolute pixel difference between two Sentinel-2 RGB composites and converts the result to a single grayscale change-intensity band — brighter pixels mean more visible change at that location.</p>
-    <p>Official stadium locations were pulled directly from an ArcGIS Online feature service rather than digitized by hand, which kept the location data authoritative. Each point was then buffered by 1000 meters — zooming the map series directly to the raw points turned out to be unreliable, so the buffer polygon became the layer the series actually indexes on.</p>
+    <p>Official stadium locations were pulled directly from an ArcGIS Online feature service rather than digitized by hand, which kept the location data authoritative. Each point was then buffered by 1000 meters, zooming the map series directly to the raw points turned out to be unreliable, so the buffer polygon became the layer the series actually indexes on.</p>
   </section>
 
   <section>
-    <h2>The automation, which is the actual point</h2>
-    <p>The part worth highlighting isn't the raster math above — it's that all seven stadium maps come out of a single ArcGIS Pro layout, script-driven end to end. One <strong>Spatial Map Series</strong>, indexed on the buffer layer, iterates through every stadium automatically: the title text dynamically updates to the current stadium's name, the map frame re-centers, and the whole set exports as one 300 dpi PDF in a single run.</p>
+    <h2>Project Highlight: The Layout Automation</h2>
+    <p>The part worth highlighting isn't the raster math above, it's that all seven stadium maps come out of a single ArcGIS Pro layout, script-driven end to end. One <strong>Spatial Map Series</strong>, indexed on the buffer layer, iterates through every stadium automatically: the title text dynamically updates to the current stadium's name, the map frame re-centers, and the whole set exports as one 300 dpi PDF in a single run.</p>
     <div class="fig-pair">
       <figure>
         <img src="images/qatar-lusail.png" alt="Automated map series export for Lusail Stadium">
@@ -186,11 +182,11 @@
     <ul class="plain">
       <li>Editing the stadium points' symbology directly kept breaking the series' indexing — solved by duplicating the layer, so one copy handles the visual highlight marker and the original stays untouched for indexing.</li>
       <li>Zooming directly to stadium points was unreliable across runs — replaced with the 1000m buffer approach described above.</li>
-      <li>The layout construction (title placement, north arrow, scale bar, legend) was adapted from ESRI's official layout-automation documentation and a course demonstration, then modified for this series. AI assistance was used to work out the correct symbology syntax for the highlight marker where documentation was sparse.</li>
+      <li>The layout construction (title placement, north arrow, scale bar, legend) was adapted from ESRI's official layout-automation documentation and a course demonstration, then modified for this series.</li>
     </ul>
     <div class="honest">
       <h3>What this would need to scale further</h3>
-      <p>This runs cleanly across seven stadiums that share a common scale and imagery source. Applying it to a larger or more varied set of sites — different scales, different imagery dates, sites that need individual zoom levels — would mean making the buffer distance and map scale adaptive per site rather than fixed, which the current version doesn't do.</p>
+      <p>This runs cleanly across seven stadiums that share a common scale and imagery source. Applying it to a larger or more varied set of sites would mean making the buffer distance and map scale adaptive per site rather than fixed, which the current version doesn't do.</p>
     </div>
   </section>
 
@@ -199,11 +195,11 @@
     <div class="files">
       <div class="file-row">
         <div><div class="fname">Notebook (.ipynb)</div><div class="fdesc">full ArcPy pipeline, cleaned up for readability — see the note above on running it</div></div>
-        <a href="#" class="file-link">view on GitHub</a>
+        <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/qatar-files/qatar-change-detection-notebook.ipynb" class="file-link">view on GitHub</a>
       </div>
       <div class="file-row">
         <div><div class="fname">Full map series (PDF)</div><div class="fdesc">all seven stadiums, 2016–2022 comparison</div></div>
-        <a href="#" class="file-link">download</a>
+        <a href="https://github.com/ajalonpeterson/ajalonpeterson.github.io/blob/main/qatar-files/Stadium_Map_Series.pdf" class="file-link">download</a>
       </div>
     </div>
   </section>
