@@ -254,8 +254,9 @@
   }
   .contact h2{font-size:36px; font-weight:600; max-width:520px; line-height:1.2;}
   .contact-links{display:flex; flex-direction:column; gap:10px; font-family:var(--mono); font-size:14px;}
-  .contact-links a{color:var(--paper-dim); transition:color .18s ease;}
+  .contact-links a{color:var(--paper-dim); transition:color .18s ease; display:flex; align-items:center; gap:10px;}
   .contact-links a:hover{color:var(--contour);}
+  .contact-links svg{width:16px; height:16px; flex-shrink:0;}
 
   footer{
     padding:26px 0 50px; display:flex; justify-content:space-between;
@@ -453,9 +454,18 @@
     <div class="contact">
       <h2>Have a dataset that needs a map, a model, or both? Let's talk.</h2>
       <div class="contact-links">
-        <a href="mailto:ajalon.peterson@gmail.com">ajalon.peterson@gmail.com</a>
-        <a href="https://github.com/ajalonpeterson" target="_blank" rel="noopener">github.com/ajalonpeterson</a>
-        <a href="https://www.linkedin.com/in/ajalonpeterson" target="_blank" rel="noopener">linkedin.com/in/ajalonpeterson</a>
+        <a href="mailto:ajalon.peterson@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 6.5 L12 13 L21 6.5"/></svg>
+          ajalon.peterson@gmail.com
+        </a>
+        <a href="https://github.com/ajalonpeterson" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0.5C5.73 0.5 0.65 5.58 0.65 11.85c0 5.02 3.26 9.28 7.78 10.78 0.57 0.1 0.78-0.25 0.78-0.55 0-0.27-0.01-1.15-0.02-2.09-3.17 0.69-3.83-1.34-3.83-1.34-0.52-1.31-1.26-1.66-1.26-1.66-1.03-0.7 0.08-0.69 0.08-0.69 1.14 0.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3 0.94 0.1-0.73 0.4-1.23 0.72-1.51-2.53-0.29-5.19-1.27-5.19-5.63 0-1.24 0.44-2.26 1.17-3.06-0.12-0.29-0.51-1.45 0.11-3.02 0 0 0.96-0.31 3.14 1.17 0.91-0.25 1.89-0.38 2.86-0.38 0.97 0 1.95 0.13 2.86 0.38 2.18-1.48 3.14-1.17 3.14-1.17 0.62 1.57 0.23 2.73 0.11 3.02 0.73 0.8 1.17 1.82 1.17 3.06 0 4.37-2.67 5.34-5.21 5.62 0.41 0.35 0.77 1.04 0.77 2.11 0 1.52-0.01 2.75-0.01 3.12 0 0.3 0.2 0.66 0.79 0.55 4.51-1.51 7.77-5.76 7.77-10.78C23.35 5.58 18.27 0.5 12 0.5z"/></svg>
+          github.com/ajalonpeterson
+        </a>
+        <a href="https://www.linkedin.com/in/ajalonpeterson" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-0.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h0.05c0.48-0.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+          linkedin.com/in/ajalonpeterson
+        </a>
       </div>
     </div>
   </section>
